@@ -1,0 +1,921 @@
+CHAPTER 1
+INTRODUCTION
+1.1	Introduction to Storage Area Networks
+Storage area networks [4] (SAN) started as a technology for tackling the growing need for dynamic storage in industrial enterprises. SAN addressed different challenges in storing information of the enterprise and their management, thus providing the end users full independence to work without a concern about the storage requirements of their application or the sharing of data across the globe. The dynamic management of storage needs by SAN also opened up a lot of security vulnerabilities. A number of security protocols have been proposed over the years to tackle the growing security concerns, especially the threat of computer hackers [1].
+Majority of security protocols proposed have focused on intrusion detection mechanisms with the ability to catch intruder acts like deployment of Trojan horse, adding a backdoor and so on by reliance on pattern detection, history logs and journal based metadata to detect breach of security in storage systems [1] [4]. Protocols thus have focused on catching the intruder after the act of intrusion has been performed. 
+An emerging technology for SAN called Self securing storage devices [2] gave a whole new perspective to security protocols. Self securing storage moved the security protocols from client to centralized server, eliminating the ability of the hacker to bypass the security loopholes in host operating systems at client end. 
+Self securing storage server or the S4 server [2] also relied upon audit logs, history pool and journal based metadata for detection of intrusion activities, modification of data and audit logs; with in a limited window of time. Yet, the intruder was able to steal and use the data to access the resources of legitimate users. One of the ways to tackle the intruders is to bait them with Decoy documents and embedded Beacon signals [3] [5] [6], and know the location of compromised system. This technique is able to detect the identity of the intruder and the locality of compromised system. But, it relies on copying of the documents onto the intruder’s compromised system. 
+In this project, we propose a security protocol based on MAZE architecture, which eliminates the need for the decoy documents to be copied onto the compromised host system by keeping the intruder hooked on to it, so that the MAZE security system has enough time to capture the actions and relevant information such as MAC address of intruder system or the compromised system.
+
+1.2	Problem Statement
+With traditional Intrusion Detection System, intruders are detected only after they have been able to use the credentials obtained. The downtime involved in the form of detection latency is high with traditional approach. There is already loss of data/ resources by the time intrusion is caught. Traditional IDS is unable to handle Insider threat. There is a failure to provide the required transparency by existing IDS. The proposed protocol enables on the time and in the act detection of malicious activities and a claim to be able to catch the intruders beyond the system upon the usage of generated Fake Credentials is also an additional feature.
+1.2.1	Features of the Project	
+A MAZE is a game involving finding the correct route from a given source to destination, the network in general can be visualized as a MAZE and all the incorrect routes can be regarded as deviation from standard behavior of the user.  The deviation hence captured can be used to create a trap for capturing the forensic information of the act of intrusion.  Once the information is captured, customized alerts can be sent across to users of the system or the network component regarding the violation of standard path.  This whole concept forms the basis for our protocol; hence the name MAZE Security protocol.  
+
+The features of the protocol are listed below:  
+•	Dual Authentication Procedure involving Entry and Exit Authentication.
+o	Entry Authentication comprises of Mobile based one time session key and password authentication.
+•	Usage of logging at file level to detect operations performed on a file such as:
+o	Creation, Deletion, Access, Modification, Update of files and directories.
+o	Unauthorized access of user to non privileged files.
+o	Content copy from one file to another.
+•	Usage of Decoy files, Fake Credential Integrated files to tackle insider threat to certain extent.
+•	Creation of a Virtual File System Trap environment – Sandtrap: to understand the intruder actions on files, thus to create Intruder forensics.
+•	End user forensics: to capture end user actions and insider actions on files.
+•	Group based Access mechanism.
+•	Sandtrap: ability to emulate the behaviour of Actual File System.
+•	Fake Credential Creator [FAKER], a module to create fake credentials from actual credentials of user, the purpose of course is to catch the intruder when he tries to use the fake credentials anywhere in the outside world.
+•	RDC implementation to provide client access to Server.
+•	Capturing of IP Address as well as MAC Address for blocking Intruder when he tries to access server using the same device but with different credentials.
+•	File recovery mechanism and ability to detect exact line tampering of a tampered file.
+
+
+
+1.3 Objectives of the Project
+The Objectives of the project are as follows:
+i.	To tackle Insider and Intruder threat to certain extent.
+ii.	To have ability to generate alerts upon unauthorized/ malicious access.
+iii.	To record each and every end user activity useful in performing End User Forensics as well as to record each and every intruder activity useful in performing Intruder Forensics and for forming proactive strategies.
+iv.	Capability of using separate channels for sending associated authentication credentials to legitimate users.
+v.	To catch intruders using fake credentials obtained from system beyond the system.
+
+1.4 Organization of Thesis
+	The rest of the thesis is organized as follows:  in Chapter 2, the Literature survey has been done explaining Security measures employed in SAN, the Insider threat and security measures employed in mitigation of online transaction fraud.  The Chapter 3 discusses Decoy Documents and Deception tools available in current scenario; the properties of Decoy Documents and Honeypots have been discussed.  In Chapter 4, Software Requirement Specification is documented containing Hardware Requirements, Software requirements with a brief overview of Java and Java FX technologies.  The Chapter 5, System Analysis explores the Existing System and the proposed system along with Scenario illustration and Probability based efficiency depiction.  The Chapter 6, Project Implementation gives out details of implementation in terms of Class Diagram, Use Case Diagram, Package Structure and Graphic User Interface snapshots.  The Chapter 7 titled MAZE IDPS Forensic results gives out the results in terms of snapshots.  The Chapter 8, discusses Conclusion and Future enhancements. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CHAPTER 2
+LITERATURE SURVEY
+2.1 Security Measures in SAN 
+The security measures in SAN comprises of Access Control mechanisms to ensure authentication and authorization, Auditing and Accounting, Data Security involving Data Confidentiality and Integrity, Symmetric and Asymmetric encryption techniques and the usage of Encryption algorithms like DES, 3DES, AES, RSA, Diffie-Hellman, DSA and SHA. Apart from these, there are several network related security mechanisms like IP Security, Fiber Channel Security, and Zoning Mechanisms. All the Security measures taken above are designed to handle security at information level or storage Level and at the network level [8].
+
+2.1.1	Authentication and Authorization
+
+A critical aspect of SAN security is authorization and authentication, controlling who has access to what within the SAN. Currently, the level of authentication and authorization for SANs is not as detailed and granular as it should be. Moving SAN communications to IP-based networks makes it even more exposed and vulnerable to attacks made on corporate networks, such as device identity spoofing. Each of the technologies, like iSCSI as well as FC or FCIP has its own mechanisms of how to address the remote node authentication requirements or it relies on other protocols such as IP Security protocol (IPsec).
+
+2.1.2	Auditing and Accounting
+
+It is essential that an audit trail is maintained for auditing and troubleshooting purposes. Logs should be inspected on a regular basis and archived.
+
+
+
+2.1.3	Confidentiality and Integrity
+
+Data confidentiality states that the system has to guarantee that the information cannot be accessed by unauthorized people, remaining confidential for them but available for only authorized personnel. As shown in the next section, this is usually accomplished by data encryption. Data integrity states that the system has to guarantee that the data stored or processed within its boundaries is not altered or tampered with in any way.
+
+2.1.4	Asymmetric and Symmetric Encryption
+
+Encryption is the translation of data into a secret code and is the most effective way to achieve data security. To read an encrypted file you must have access to a secret key, or password or passphrase, which enables you to decrypt it.  Unencrypted data is called plain text; encrypted data is referred to as cipher text. There are two main types of encryption: symmetric encryption and asymmetric encryption (also called public-key encryption). Symmetric: when the same secret password, or key, is used to encrypt a message and decrypt the corresponding cipher text.  Asymmetric: when one key is used to encrypt a message and another to decrypt the corresponding cipher text.
+
+2.1.5	IP Security, Fiber Channel Security and Zoning Mechanism
+
+There a number of standards and products originally developed for local IP networks that have gained a major importance as such networks became world-widely prevalent. In this section, we discuss some of the standards associated with secure network management, which is the ultimate use for IP networks on SANs. 
+The Simple Network Management Protocol (SNMP) was extended for security functions to SNMPv3. The SNMPv3 specifications were approved by the Internet Engineering Steering Group (IESG) as a full Internet standard in March 2002.
+IP security (IPSec) uses cryptographic techniques obtaining management data that can flow through an encrypted tunnel. Encryption makes sure that only the intended recipient can make use of it (RFC 2401). IPSec is widely used to implement Virtual Private Networks (VPN).
+Other cryptographic protocols for network management are Secure Shell (SSH) and Transport Layer Security (TLS, RFC 2246). TLS was formerly known as Secure Sockets Layer (SSL). They help ensure secure remote login and other network services over insecure networks.
+A common method to build trusted areas in IP networks is the use of firewalls. A firewall is an agent that screens network traffic and blocks traffic it believes to be inappropriate or dangerous. We will use a firewall to filter out addresses and protocols we do not want to pass into our LAN. A firewall will protect the switches connected to the management LAN, and allows only traffic from the management stations and certain protocols that you define.
+Finally, another important IP-based security mechanism is the Remote Authentication Dial-In User Service (RADIUS). RADIUS is a distributed security system developed by Lucent Technologies Internetworking Systems and is used nowadays as a common industry standard for user authentication, authorization, and accounting (RFC 2865). A RADIUS Network Access Server (NAS), which acts as an IP-router or switch in LANs and a SAN switch in SANs, is responsible for performing such functions.  
+Fibre Channel security, has borrowed most of its security mechanisms from its predecessor technologies, and leverages access and data security on today’s SANs. As the fabric complexity increases, more stringent controls are required for guarding against malicious attacks and accidental configuration changes. Additionally, increasingly more in-fabric functionality is being proposed and implemented that requires a closer focus on security.  
+Zoning allows for finer segmentation of the switched fabric. Zoning can be used to instigate a barrier between different environments. Only the members of the same zone can communicate within that zone, and all other attempts from outside are rejected. One important point to be aware of is that it is not providing a security feature, it provides separation.  Zoning can be implemented in two ways: Hardware zoning, Software zoning. 
+Hardware zoning is based on the physical fabric port number. The members of a zone are physical ports on the fabric switch. The availability of hardware enforced zoning and the methods to create hardware enforced zones depend upon the switch hardware used.
+Software zoning is implemented by the fabric operating systems within the fabric switches. When using software zoning, the members of the zone can be defined using their WWN and WWPN.  With software zoning there is no need to worry about the device’s physical connections to the switch. If we use WWNs for the zone members, even when a device is connected to another physical port, it will still remain in the same zoning definition, because the device’s WWN remains the same. The zone follows the WWN.
+2.1.6	Hackers, Intruders Attack
+Another perspective of Security threat is the attack of Computer Hackers or Intruders. The Intruders can be classified into Outsiders and Insiders. Outsiders involve the traditional hackers who sniff the network or storage for useful information, the insiders may be innocent users who may not be aware of their security violations or the privileged users who intend to use their security clearance to obtain access to files of other users [6]. 
+
+2.1.7	Self Securing Storage Device
+Self Securing Storage Devices was one of the security mechanisms which can be deployed in SAN or in an NFS environment. It relied on mechanisms like auditing, keeping old versions of data for a window of time, regardless of the commands obtained from potentially compromised systems to prevent the intruders from undetectable tampering of or deleting of the stored data [2]. It had the mechanism of History Pool management for maintaining the old versions of the objects present in the Self Securing S4 server. There were also administrative tools to give administrative access to the versions of data. The S4 implementation relied on journal based metadata to efficiently keep object versions of metadata. The intrusion detection mechanisms here compared the different object versions of the data kept in the server to detect the intrusion activity. Even though the intrusion was detected the intruders would already have the data and they would have used it to access the resources of the users. The detection became further difficult in case of an intruder who had got administrative level access, hence increasing the detection latency window.
+
+2.2 Insider Threat
+An Insider Threat is a malicious threat to an organization that comes from people within the organization, such as employees, former employees, contractors or business associates, who have inside information concerning the organization's security practices, data and computer systems. The threat may involve fraud, the theft of confidential or commercially valuable information, the theft of intellectual property, or the sabotage of computer systems.
+
+Insiders may have accounts giving them legitimate access to computer systems, with this access originally having been given to them to serve in the performance of their duties; these permissions could be abused to harm the organization. Insiders are often familiar with the organization's data and intellectual property as well as the methods that are in place to protect them. This makes it easier for the insider to circumvent any security controls of which they are aware. Physical proximity to data means that the insider does not need to hack into the organizational network through the outer perimeter by traversing firewalls; rather they are in the building already, often with direct access to the organization's internal network. Insider threats are harder to defend against than attacks from outsiders, since the insider already has legitimate access to the organization's information and assets.
+To mitigate the threat of insider attacks, a security technique involving the usage of Decoy documents was proposed. It involves baiting in the intruders through the use of decoys and catching them once they have used the decoy credentials through the obtained documents. The deception based mechanism called the Honeypots [6] was the basis for Decoy document Distributor system [6], which helped gather intelligence on how the intruders operate by giving them fake credentials. Decoy document distributor thus revolved around the action of intruders on the Decoy documents. With the help of embedded beacons the action of the intruder was sent to the remote server. Additionally the embedded markers helped to alert the network sensors of the intruder activities.
+
+2.3 Security Measures to mitigate Online Transaction Fraud
+	One of the features of the system involves creation of fake credentials from users’ genuine credentials characteristics.  It has its application in mitigation of Online Transaction Fraud.  One of the by products of the mechanism is the ability to be able to use the fakes in a file and deployment in MAZE.  The following gives out some of methodologies involved in mitigation of Online Transaction Fraud Threat.
+
+A. Protecting the integrity of transactions through risk-based authentication:
+Some of the existing solutions for tracking fraud involved adding a layer of password authentication – 3DS for transactions.  The customers however chose to opt out of it in optional scenarios.  A novel proposal was to go with Risk-based authentication which relied on shopping patterns, geographical location differences to isolate the fraudulent transaction, thus increasing overall trust in online transactions.
+
+B. Protecting consumers from payment card theft and related identity crimes by tokenizing cardholder data:
+Yet another solution proposed was to tokenize the credit card details when they are transacted inside the shopping servers, the purpose was to nullify the credit card details being passed as raw data and to maintain secure transaction by the use of tokenized credit card details as the tokens would only be valid inside the server.
+C. Protecting reputable brands and their customers by shutting down phishing and Trojan attacks that facilitate e-commerce fraud:
+An attack pattern employed is the use of phishing mails to tap out the credentials.  A series of phishing mail are sent and the customer would fall for one of the mails and enter their credentials on a phishing website.  Thus the phishers obtained credentials and use the same to transact online.  The solution was to monitor the transactions, alert and update information to the user, block the phishing site and recover the stolen credentials.
+
+D. Using Decoys and Phoneytokens to lure intruders and catch them:
+A solution proposed which made extensive use of phoney credentials and decoy information was phoneytokens [10] and D3  [Decoy Document Distributor] system, which spread the decoy credentials with an intention to catch intruders when they either access the files or use decoy or phoney credentials online.
+
+The existing system Decoy Document Distributor have not elaborated on how to generate the exact decoy credentials, the decoy is restricted by the assumption that the decoy would be used from Intruder’s system and they would allow it to be opened without having their firewall enabled.  A simple fix for the intruder would be to open documents with their internet disabled or firewall enabled.
+
+The analysis conducted in Exfiltration Study Section of [9] said that the intruders would not fall for credentials, which they already know have been compromised, hence leading to loss of a Decoy’s Credibility.
+
+E. Using Foreign Language based Decoy documents to increase the resource utilization for Document translation at Intruder’s end:
+This solution proposed employs the usage of foreign language based decoy documents [20] taking into consideration that some of the legitimate users may be of different origin.  The approach is for making the intruder to spend more time translating the document before they can use it.  Since the decoy documents generated would be in a different language than the business language, legitimate users are easily able to distinguish it.  This was one of the first measures proposed to enhance the properties, specifically the Enticingness of Decoy files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CHAPTER 3
+DECEPTION AND DECOY DOCUMENTS
+3.1 Introduction to Deception
+The use of deception, or decoys, plays a valuable role in the protection of systems, networks, and information. The first use of decoys (i.e., in the cyber domain) has been credited to Cliff Stoll, he provides a thorough account of his crusade to catch German hackers breaking into Lawrence Berkeley Laboratory computer systems. Stoll's methods included the use of bogus networks, systems, and documents to gather intelligence on the German attackers who were apparently seeking state secrets. Among the many techniques waged, he crafted “bait" files, or in his case, bogus classified documents that really contained non-sensitive government information and attached alarms" to them so that he would know if anyone accessed at them. To Stoll's credit, a German hacker was eventually caught and it was found that he had been selling secrets to the KGB [7].
+
+3.2 Decoy Documents
+The decoy documents introduced in this section utilize similar deception mechanisms as well as beacons to signal a remote detect and alert in real-time time when a decoy has been opened. Web bugs are a class of silent embedded tokens which have been used to track usage habits of web or email users. Unfortunately, they have been most closely associated with unscrupulous operators, such as spammers, virus writers, and spyware authors who have used them to violate users’ privacy. Typically they will be embedded in the HTML portion of an email message as a non-visible white on white image, but they have also been demonstrated in other forms such as Microsoft Word, Excel, and PowerPoint documents. When rendered as HTML, a web bug triggers a server update which allows the sender to note when and where the web bug was viewed. Animated images allow the senders to monitor how long the message was displayed. The web bugs operate without alerting the user of the tracking mechanisms. The advantage for legitimate advertisers is that this allows them to monitor advertisement effectiveness; while privacy advocates worry that this technology can be misused to spy on users' habits. The work on Decoy Creation leverages the same ideas, but extends them to other document classes and is more sophisticated in the methods used to draw attention. In addition, the targets are insiders who should have no expectation of privacy on a system they violate.
+
+3.3 Decoy Properties
+One of the major contributions of this section is the identification and formal definition of core properties of a decoy that will successfully bait inside attackers. We numerate various properties and means of measuring these properties that are associated with decoys to ensure their use will be likely to snare an attacker. These properties serve as goals for decoys and systems described in later chapters. Although we define the properties in the context of our decoy documents, they are directly applicable to the rest of the decoys used throughout this work. We note the differences where they may exist. We introduce the following notation for these definitions.
+
+Believable: Capable of eliciting belief or trust; capable of being believed; appearing true; seeming to be true or authentic.
+
+Enticing: highly attractive and able to arouse hope or desire; an alluring prospect"; lure.
+
+Conspicuous: easily visible; easily or clearly visible; obvious to the eye or mind; Attracting attention.
+
+Detectable: to discover or catch (a person) in the performance of some act: to detect someone cheating.
+
+Variability: The range of possible outcomes of a given situation; the quality of being subject to variation.
+Non-interference: Something that does not hinder, obstructs, or impede.
+
+Differentiable: to mark or show a difference in; constitute a difference that distinguishes; to develop differential characteristics in; to cause differentiation of in the course of development.
+
+Expiration: the ending of the period of time for which a decoy is valid.
+
+Cost: the price or level of effort required to acquire or produce a particular decoy.
+
+3.4 Honeypots
+In computer terminology, a honeypot is a trap set to detect, deflect, or in some manner counteract attempts at unauthorized use of information systems. Generally it consists of a computer, data, or a network site that appears to be part of a network, but is actually isolated and monitored, and which seems to contain information or a resource of value to attackers.
+
+Honeypots can be classified based on their deployment and based on their level of involvement. Based on deployment, honeypots may be classified as:
+1.	production honeypots
+2.	research honeypots
+
+Production honeypots are easy to use, capture only limited information, and are used primarily by companies or corporations; Production honeypots are placed inside the production network with other production servers by an organization to improve their overall state of security. Normally, production honeypots are low-interaction honeypots, which are easier to deploy. They give less information about the attacks or attackers than research honeypots do.
+Research honeypots are run to gather information about the motives and tactics of the Blackhat community targeting different networks. These honeypots do not add direct value to a specific organization; instead, they are used to research the threats organizations face and to learn how to better protect against those threats. Research honeypots are complex to deploy and maintain, capture extensive information, and are used primarily by research, military, or government organizations.
+Based on design criteria, honeypots can be classified as
+1.	pure honeypots
+2.	high-interaction honeypots
+3.	low-interaction honeypots
+Pure honeypots are full-fledged production systems. The activities of the attacker are monitored using a casual tap that has been installed on the honeypot's link to the network. No other software needs to be installed. Even though a pure honeypot is useful, stealthiness of the defence mechanisms can be ensured by a more controlled mechanism.
+High-interaction honeypots imitate the activities of the real systems that host a variety of services and, therefore, an attacker may be allowed a lot of services to waste his time. According to recent researches in high interaction honeypot technology, by employing virtual machines, multiple honeypots can be hosted on a single physical machine. Therefore, even if the honeypot is compromised, it can be restored more quickly. In general, high interaction honeypots provide more security by being difficult to detect, but they are highly expensive to maintain. If virtual machines are not available, one honeypot must be maintained for each physical computer, which can be exorbitantly expensive. Example: Honeynet.
+Low-interaction honeypots simulate only the services frequently requested by attackers. Since they consume relatively few resources, multiple virtual machines can easily be hosted on one physical system, the virtual systems have a short response time, and less code is required, reducing the complexity of the security of the virtual systems. Example: Honeyd.
+
+
+
+CHAPTER 4
+SOFTWARE REQUIREMENT SPECIFICATION
+4.1 Hardware Requirements
+The requirements for illustration of the project are as follows:
+•	Two Laptops or Desktop machines.
+•	Intel Core Pentium 4 3 GHz
+•	1 GB RAM
+•	1 MB L2 Cache
+•	20 GB Hard disk
+•	RJ 45 connected LAN Cable
+
+4.2 Software Requirements
+Java programming Language and Java FX has been used to come up with the design and implementation of the project.  The requirements are briefly given below:
+•	Window 7/XP
+•	Eclipse IDE
+•	MySQL database
+•	Java 1.7 Software development Kit
+•	Java FX – Front End Design
+•	Apache POI library
+
+4.3 Java Programming Language
+Java is a general-purpose, concurrent, class-based, object-oriented computer programming language that is specifically designed to have as few implementation dependencies as possible. It is intended to let application developers "write once, run anywhere" (WORA), meaning that code that runs on one platform does not need to be recompiled to run on another. Java applications are typically compiled to bytecode (class file) that can run on any Java virtual machine (JVM) regardless of computer architecture.
+There were five primary goals in the creation of the Java language:
+1.	It should be "simple, object-oriented and familiar"
+2.	It should be "robust and secure"
+3.	It should be "architecture-neutral and portable"
+4.	It should execute with "high performance"
+5.	It should be "interpreted, threaded, and dynamic"
+Java virtual machine
+A Java virtual machine is a program which executes certain other programs, namely those containing Java bytecode instructions. JVM's are most often implemented to run on an existing operating system, but can also be implemented to run directly on hardware. A JVM provides a run-time environment in which Java byte code can be executed, enabling features such as automated exception handling, which provides root-cause debugging information for every software error (exception). A JVM is distributed along with Java Class Library, a set of standard class libraries (in Java bytecode) that implement the Java application programming interface (API). These libraries, bundled together with the JVM, form the Java Runtime Environment (JRE).
+JVMs are available for many hardware and software platforms. The use of the same bytecode for all JVMs on all platforms allows Java to be described as a write once, run anywhere programming language, versus write once, compile anywhere, which describes cross-platform compiled languages. Thus, the JVM is a crucial component of the Java platform.
+Java bytecode is an intermediate language which is typically compiled from Java, but it can also be compiled from other programming languages. For example, Ada source code can be compiled to Java bytecode and executed on a JVM.
+ 
+Fig 4.1 Overview of JVM Architecture
+Fig 4.1 presents Overview of Java virtual machine (JVM) architecture. Source code is compiled to Java bytecode, which is verified, interpreted or JIT-compiled for the native architecture. The Java APIs and JVM together make up the Java Runtime Environment (JRE).
+
+4.4 Java FX
+What Is JavaFX?
+JavaFX is a set of graphics and media packages that enables developers to design, create, test, debug, and deploy rich client applications that operate consistently across diverse platforms.
+JavaFX Architecture
+Figure 4.2 illustrates the architectural components of the JavaFX platform. The sections following the diagram describe each component and how the parts interconnect. Below the JavaFX public APIs lies the engine that runs your JavaFX code. It is composed of subcomponents that include the new JavaFX high performance graphics engine, called Prism; the new small and efficient windowing system, called Glass; a media engine, and a web engine. Although these components are not exposed publicly, their descriptions can help you to better understand what runs a JavaFX application.
+•	"Scene Graph"
+•	"Java Public APIs for JavaFX Features"
+•	"Graphics System"
+•	"Glass Windowing Toolkit"
+•	"Media and Images"
+•	"Web Component"
+•	"CSS"
+•	"UI Controls"
+•	"Layout"
+•	"2-D and 3-D Transformations"
+•	"Visual Effects"
+Figure 4.2 illustrates JavaFX Architecture Diagram.
+ 
+Fig 4.2 Java FX Architecture
+Key Features
+JavaFX 2.2 and later releases have the following features:
+•	Java APIs. JavaFX is a Java library that consists of classes and interfaces that are written in native Java code. The APIs are designed to be a friendly alternative to Java Virtual Machine (Java VM) languages, such as JRuby and Scala.
+•	FXML and Scene Builder. FXML is an XML-based declarative markup language for constructing a JavaFX application user interface. A designer can code in FXML or use JavaFX Scene Builder to interactively design the graphical user interface (GUI). Scene Builder generates FXML markup that can be ported to an IDE where a developer can add the business logic.
+•	WebView. A web component that uses WebKitHTML technology to make it possible to embed web pages within a JavaFX application. JavaScript running in WebView can call Java APIs, and Java APIs can call JavaScript running in WebView.
+•	Swing interoperability. Existing Swing applications can be updated with new JavaFX features, such as rich graphics media playback and embedded Web content.
+•	Built-in UI controls and CSS. JavaFX provides all the major UI controls required to develop a full-featured application. Components can be skinned with standard Web technologies such as CSS
+•	Canvas API. The Canvas API enables drawing directly within an area of the JavaFX scene that consists of one graphical element (node).
+•	Multitouch Support. JavaFX provides support for multitouch operations, based on the capabilities of the underlying platform.
+•	Hardware-accelerated graphics pipeline. JavaFX graphics are based on the graphics rendering pipeline (Prism). JavaFX offers smooth graphics that render quickly through Prism when it is used with a supported graphics card or graphics processing unit (GPU). If a system does not feature one of the recommended GPUs supported by JavaFX, then Prism defaults to the Java 2D software stack.
+•	High-performance media engine. The media pipeline supports the playback of web multimedia content. It provides a stable, low-latency media framework that is based on the GStreamer multimedia framework.
+•	Self-contained application deployment model. Self-contained application packages have all of the application resources and a private copy of the Java and JavaFX runtimes. They are distributed as native installable packages and provide the same installation and launch experience as native applications for that operating system. 
+
+
+
+
+
+CHAPTER 5
+SYSTEM ANALYSIS
+5.1 Existing Systems
+
+5.1.1	Intrusion Detection System
+
+An intrusion detection system (IDS) is a device or software application that monitors network or system activities for malicious activities or policy violations and produces reports to a management station. Some systems may attempt to stop an intrusion attempt but this is neither required nor expected of a monitoring system. Intrusion detection and prevention systems (IDPS) are primarily focused on identifying possible incidents, logging information about them, and reporting attempts. In addition, organizations use IDPSes for other purposes, such as identifying problems with security policies, documenting existing threats and deterring individuals from violating security policies. IDPSes have become a necessary addition to the security infrastructure of nearly every organization.
+
+IDPSes typically record information related to observed events, notify security administrators of important observed events and produce reports. Many IDPSes can also respond to a detected threat by attempting to prevent it from succeeding. They use several response techniques, which involve the IDPS stopping the attack itself, changing the security environment (e.g. reconfiguring a firewall) or changing the attack's content.
+
+In a passive system, the intrusion detection system (IDS) sensor detects a potential security breach, logs the information and signals an alert on the console and/or owner. In a reactive system, also known as an intrusion prevention system (IPS), the IPS auto-responds to the suspicious activity by resetting the connection or by reprogramming the firewall to block network traffic from the suspected malicious source. The term IDPS is commonly used where this can happen automatically or at the command of an operator; systems that both "detect (alert)" and "prevent".
+5.1.2 Storage Intrusion Detection System
+Storage IDSs focus on the threat of an attacker who has compromised a host system in a managed computing environment. By “compromised,” we mean that the attacker subverted the host’s software system, gaining the ability to run arbitrary software on the host with OS-level privileges. The compromise might have been achieved via technical means (e.g., exploiting buggy software or a loose policy) or non technical means (e.g., social engineering or bribery). Once the compromise occurs, most administrators wish to detect the intrusion as quickly as possible and terminate it. Intruders, on the other hand, often wish to hide their presence and retain access to the machine.
+
+Unfortunately, once an intruder compromises a machine, intrusion detection with conventional schemes becomes much less effective. Host-based IDSs can be rendered ineffective by intruder software that disables them or feeds them misinformation, as many such tools do. Network IDSs can continue to look for suspicious behaviour, but are much less likely to find an already successful intruder; most NIDSs look for attacks and intrusion attempts rather than for system usage by an existing intruder [Ganger et al. 2003]. A storage IDS can help by offering a vantage point on a system component that is often manipulated in suspicious ways after the intruder compromises the system.
+
+A key characteristic of the described threat model is that the attacker has software control over the host, but does not have physical access to its hardware. We are not specifically trying to address insider attacks, in which the intruder would also have physical access to the hardware and its storage components. Also, for the storage IDS to be effective, we assume that neither the storage device nor the admin console are compromised.  However prevention of such acts has not been an area of focus. 
+
+
+
+5.2 Proposed System – MAZE Intrusion Detection and Prevention System
+In the proposed system, we have focused on enhancing the features of Storage Servers by giving them the ability to handle insider threat and much required transparency in terms of File Action Logger.  Our protocol makes extensive use of deception in terms of usage of Decoy files, FC integrated files and Sandtrap File System.  The proposed system also has in place MAC address based anomaly detector, policies and rules for maximizing intrusion detection.  It specifically handles one particular aspect of   insider threat that is Content Copy from one file to another.  The working of the project is further explained in the following sections.  
+
+5.2.1 Flow of the Project
+
+ 
+Fig 5.1:  Flow of the Project
+
+The above figure [Fig 5.1] depicts the flow of the project.  The End Users’ Credentials are collected and are sent across to FAKER System for analysis and production of corresponding Fake Credentials to be deployed in MAZE Server in form of FC Integrated Decoy Files. The Server contains normal user files and directories, decoy files along with FC Integrated Decoy Files.
+
+The end user logs to the MAZE Server to conduct a transaction and for interacting with his/her files.  In case of a normal transaction no alerts are generated.  In case of an Intruder, depending on his access pattern in the Server, he will be placed in Sandtrap File System for further analysis of his actions and for using the forensics obtained to form proactive strategies against intruders.  The intruder action also triggers alerts which would be sent across to the legitimate users as a conformation of crime in progress.
+
+5.2.2 Internal Logic of MAZE Server
+The figure [Fig 5.2] depicts the internal logic behind MAZE Server.  The modules are explained in the coming paragraph. 
+ 
+Fig 5.2:  Internal Logic Framework of MAZE Server
+Entry/Exit Authentication Module:
+This module handles entry and exit authentication of users in MAZE Storage Server.  The primary authentication or the entry authentication itself comprises of two key authentications, one involving the username and password and second one involving a unique one time session key authentication sent to user’s mobile when he/she wishes to conduct a transaction in the server.  The exit key authentication involves password used to commit changes done during the session to the user files during the session.  
+
+Policies, Rules, Anomaly Detection Module:
+System Policies are used for setting policies like group based, user based and privilege based access control to files of users.  User set rules are specified by users themselves for particular files, based upon the importance given to the file. MAC Address Pattern based Anomaly Detection is used to detect anomaly in user access of system, all the user machine MAC Address are stored in database and any MAC Address apart from user’s MAC is subjugated to surveillance, hence placing them under Sandtrap FS instead of AFS. 
+
+Model Manager:
+To detect changes to AFS in terms changes to files and directories, creation, deletion and updation.  The changes are molded into models and produced models are to be deployed in Sandtrap FS.
+
+Adaptation Executer:
+To deploy Decoy Files, FC Integrated files, normal files with actual filenames, size but content and Directories in Sandtrap FS from models obtained from Model Manager.
+
+File Action Logger:
+To capture actions performed on Files in AFS and Sandtrap FS and MAC Address and IP Address of Users logging on to the system.
+
+
+5.2.3 Framework of FAKER System
+ 
+Fig 5.3:  Framework of Fake Credential Creator [FAKER System]
+
+The Framework of FAKER System is depicted in Fig 5.3, the Corporate Server is able to trace the intruder as and when they use the credentials online any time, as it works with the Faker System in detecting the loss of credibility or hacking of the account associated with the actual user, without affecting User’s actual account. Our system essentially maps Credentials{Account Numbers/Credit Card Numbers} with existing credentials of other users but with passwords of former credential, hence intruder would never be able to make out that the Credentials are fake, and they won’t be able to use the credentials as it has password of actual Credentials associated with it, but not the fake credential. But if the intruder does decide to test the credentials obtained, it would be known as a fraudulent transaction.  Even the innocent users are spared as the match occurs with the actual password of the credential with the fake credential combo. The Fake Credential only needs to have its Fake Credit Card number/ Account Number associated with   the actual password to be updated, and it can be reused in decoy documents again. 
+
+The Fake Credentials obtained are integrated in decoy files and distributed to decoy mail using FOG/ D3 [Decoy Document Distributor].  Our protocol uses the FC Integrated Decoy files to improve the probability of intruder getting caught.  As explained in the framework, an additional advantage of using FC integrated decoys is the ability to catch the intruder beyond the system. 
+
+5.2.4 Algorithms
+Algorithm 1 explains the steps involved in the design of a MAZE Defence System, every user who logs onto the S4 server is treated as a potential threat. It involves authentication procedure for both the start (entry) and stopping (exit) of session of the user in the S4 server. 
+Algorithm 1 Algorithm for MAZE Defence System
+01: Begin
+02: for Every user who logs into S4 system do
+03:	Authenticate the users by asking them for the primary password to log in for initiation of transactions.
+04:	Place the user in the MAZE for detection of malicious activities.
+05:	if (Users violate the security measures set) then 
+06:	  a. Place the user in SANDTRAP – initiate       SANDTRAP Algorithm.
+07:	  b. Send a SPIKE over the network to compromised client system.
+08:	  c. SPIKE fetches the IP address of the client system or sends the IP address to 
+      nearest base station over the internet to isolate the location of the compromised 
+      system.
+09:	else 
+10:	  Allow access for the users to their data in S4 System.
+11:	end if
+12:	Secondary authentication for the user to the end the transaction with S4 system.
+13:	if (User fails to provide secondary authentication key) then
+14:	  goto Step 04.
+15:	else
+16:	  Complete transaction and initiate Exit procedure.
+17:	end if
+18:	end for
+19: End
+
+Algorithm 2 takes the steps based on the actions of the users confirming them to be a potential threat or hacker. The purpose of this algorithm is to buy enough time for the SPIKE sent in MAZE algorithm (Algorithm 1) to isolate the geographic location of compromised machine. The purpose of creating identical decoys is to confuse the intruder further and to make the system more resilient to the actions of the intruder. 
+Algroithm 2 Algorithm for SANDTRAP mechanism
+01: Begin
+02: while (User present inside the SANDTRAP) do
+03:  a. Convert every document user was in touch with in the S4 system into a  decoy and place it in the virtual SANDBOX environment.
+04:  b. Allow access to Decoy documents to deceive the user.
+05:  c. After a stipulated amount of time for the SPIKE sent over the network to	isolate user’s  or compromised systems location, go to step 06.
+06:  if (User tries to access any of the decoys) then
+07:    Multiply the decoys by a multiplicative factor to create more identical decoys.
+08:    end if
+09:    Information is sent to S4 server which can then block the compromised user’s account.
+10: end while
+11: End
+
+Algorithm 3 defines the steps involved in formation of MAZE, it takes 2 parameters into consideration: Entry point, Exit Point. It involves the initiation of a dynamic environment which adapts as per the actions of the Intruder trapped inside the MAZE.
+Algorithm 3 Algorithm for formation of MAZE
+01: Begin
+02: for (every user who enters into MAZE) do
+03:  a. Close the Exit point.
+04:  b. Check the parameters for User’s placement in MAZE.
+05:  c. Start Monitor activity 
+06:    Decide the access level provided.
+07:    if (User violates the set of security protocols) then
+08:	I. Initiate Dynamic Environment.
+09:	II. Duplicate all the documents into decoys and deploy in the model as per model 
+obtained from model manager.
+10:	III. Initiate dynamic modelling for a constrained time interval over the time – 
+no legitimate exit point.
+11:	IV. Pass model to Adaptation Executer for deployment.
+12:    end if
+13: end for
+14: End
+
+	The Algorithm 4 used in primary validation of Credit Card number [14] [15] is presented below:
+Algorithm 4: Luhn’s Test for validation of Credit Card Number
+01. Input : Credit Card Number – String
+02. odd_sum = 0
+03. even_sum = 0
+04. Reverse_Credit_Card_Number = ReverseOf(Credit  Card  Number)
+05. Length = LengthOf(Reverse_Credit_Card_Number)
+06. for( i = 0; i < Length; i++ ) 
+07. do
+08. 	number = Reverse_Credit_Card_Number[i];
+09.	if( i % 2 == 0 )then
+10.	do
+11.		odd_sum = odd_sum + number
+12.	else
+13.	do
+14.		even_sum = even_sum + 2 * number
+15.		if( number >= 5 )then
+16.		do
+17.			even_sum = even_sum - 9
+18.		endif
+19.	endif
+20. endfor
+21. if((odd_sum + even_sum) % 10 == 0)then
+22. do
+23. 		result = true
+24. else
+25. do
+26.		result = false
+27. endif
+
+The Algorithm 5 presented below is used for generation of Fake Credit Card numbers from actual Credit cards. The Fake Credentials so generated confirm to Luhn’s test of Credit card numbers.
+Algorithm 5: Fake Credential Generator for Credit Card Numbers 
+01. for i = 0 ; i < CreditCardNumber.length() ; i++ then
+02. do
+03.            digit = Character.digit(CreditCardNumber.charAt(i), 10);
+04.            if (i == 0 || i == 1 || i == 14 || i == 15) then
+05.	     do
+05.            	do nothing
+06.            endif
+07.            if(i % 2 == 0) then
+08. 	     do
+09.            	numbersodd.add(digit)
+10.            else 
+11.	     do
+12.           	numberseven.add(digit)
+13.            endif
+14. end for	
+15.	Randomize(numbersodd)
+16.	Randomize(numberseven)
+17. FakeCreditCardNumber = Merge(numbersodd,numberseven)
+
+Algorithm 6 explains the working of FC integrated Sandtrap File System.
+Algorithm 6: FC Integrated Sandtrap Emulation
+01. Begin
+02. While( User present in Sandtrap & Authentication not initiated )do
+03.    Deploy Decoy files
+04.	   Deploy Fake Credentials in Files with actual user space filenames
+05.    	if( User accesses a file )then
+06.		do
+07.		    Open File
+08.		    if( File.owner == User & User tries to retrieve file) then
+09.		    do
+10.			Retrieve File
+11.			if( number of Files retrieved = m/2 + 1 )then
+12.			do
+13.				Send Session Key to User mail
+14.				Initiate Session Key Authentication Procedure
+15.				if( Authentication = true )then
+16.				do
+17.					Restore Actual File System, Exit Sandtrap.
+18.				else
+19.				do
+20.					Lock User Account, disconnect Session
+21.				end if
+22.			else
+23.			do 
+24.				Go to Step 05.
+25.			end if
+26.		else if( File.owner != User & User tries to retrieve file )then
+27.		do
+28.			Lock User Account, disconnect Session
+29.		else if( File.owner == User & User copies content of file )then
+30.		do
+31.			Lock User Account, disconnect Session
+32.		else if( File.owner != User & User copies content of file )then
+33.			Lock User Account, disconnect Session
+34.		endif
+35.	End While
+36. End
+
+5.3 Scenarios
+5.3.1 Normal User Behaviour
+ 
+Fig 5.4:  Normal User Behaviour inside MAZE Server
+
+The Fig 5.4 depicts Normal User behaviour inside the MAZE Server internal logic.  He would only access the privileged files, hence without triggering the Sandtrap File System.  All of his actions on the files are being recorded by File Action Logger which is useful at a later point of time for conducting user forensics.  The Normal User successfully completes entry and exit authentication too.
+  
+5.3.2 Intruder/ Insider Behaviour
+ 
+Fig 5.5:  Intruder/ Insider Behaviour inside MAZE Server
+
+The Fig 5.5 depicts Intruder/ Insider behaviour inside the MAZE Server internal logic.  He can access the non privileged files, decoy files or FC integrated files, hence triggering the Sandtrap File System.  All of his actions on the files in Actual File System and the Sandtrap File System are recorded by File Action Logger which is useful at a later point of time for conducting Intruder forensics.  The Intruder is also caught when he is either fails in entry authentication or exit authentication.  Upon failure of exit authentication, all the changes done to the files are reverted.   
+
+5.3.3 FAKER Integrated Sandtrap
+ 
+Fig 5.6:  Integration of FC Integrated Decoy files in Sandtrap File System
+
+The Fig 5.6 depicts the integration of Fake credentials in decoy files and placement of the same in Sandtrap File System.  The credentials obtained from users are used to create fake credentials.  The FCs are integrated and deployed in Sandtrap File System. The Sandtrap File System also has Normal files with no content, but with all the characteristics of the actual files in the Actual File System.
+
+5.3.4 Normal User Behavior inside Sandtrap
+The Fig 5.7 depicts Normal User Behaviour in Sandtrap File System.  In case of accidental triggering of Sandtrap File System by the Normal User, a one time session restoration can be performed by him to restore back the Actual File System.  The one time session restoration would require him to choose and restore at least 2/3rd of FC Integrated files in Sandtrap File System.  The privilege cannot be used if the violation is on other users’ files or other users’ decoy files.  Upon a successful operation, session key authentication is reinitiated.
+
+ 
+Fig 5.7: Normal User Behaviour in Sandtrap File System
+
+
+
+
+
+
+
+
+
+
+5.3.5 Intruder/ Insider Behavior inside Sandtrap
+The Fig 5.8 depicts Intruder Behaviour in Sandtrap File System.  In case of triggering of Sandtrap File System by the Intruder, he would be provided access to all the files in Sandtrap.  The Intruder would be unable to recognize FC integrated decoys and decoy files and hence may use the same in the outside world, upon which he is caught. 
+
+ 
+
+Fig 5.8: Intruder Behaviour in Sandtrap File System
+
+5.4 Probability based efficiency depiction
+Parameters in play in MAZE Security Protocol for an Intruder/ Insider
+
+- No. of Actual Files -- Na = Nu + No = No. of User files [privileged] + No. of Other User files [non-privileged]
+- No. of Decoy Files -- Nd
+- No. of FC Integrated Files -- Nf
+- No. of Authentication Procedures -- Np
+- No. of Sandtrap Trigger Points. -- Ns = Nd + Nf
+- Content Copy - considered single operation - Nc = 1 [For a single session only]
+- MAC Address of Intruder if captured previously -- Nm = 1 or 0 [if not]
+
+Probability of Intruder triggering Sandtrap = Nd + No + Nf + [Np -1] / Na + Nd + No + Nf + Np
+
+Say : 
+Nd = 13 
+Na = 25 = Na + No = 5 + 20
+Nf = 9
+Np = 2
+Nm = 1
+
+P[Intruder] = 89.58%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CHAPTER 6
+PROJECT IMPLEMENTATION
+6.1 Class Diagram
+
+Unit testing refers to tests that verify the functionality of a specific section of code, usually at the function level. In an object-oriented environment, this is usually at the class level, and the minimal unit tests include the constructors and destructors.
+The interfaces of each of the module were tested to ensure proper flow of the information in and out of the modules under consideration. Boundary conditions were checked. All independent paths were exercised to ensure that all statements in the module are executed at least once and all error-handling paths were tested. Each unit was thoroughly tested to check if it might fall in any possible situation. This testing was carried out during the programming itself. At the end of this testing phase, each unit was found to be working satisfactorily, as regard to the expected output from the module.
+
+6.1.1 Test Plans for Unit Testing
+The following section lists some of the important test cases written for unit testing:
+Sl # Test Case : 	UTC-1
+Name of Test:  	gmsGET
+
+Item being tested: 	GET Wrapper for GMS
+Sample Input: 	 Hash Reference containing additional headers like Referer etc
+Expected output: 	Response Object
+The main Classes in play in the project and the relation between them are depicted in Figure 6.1.  The Classes include the following:  
+•	ServerInitiator
+o	This class forms the main class for the client side RDC API.  It has been tweaked to send across MAC Address of the Client System which is useful in performing forensics as well as deducing compromised system.  The IDPS itself is designed in such a way as to take into consideration the MAC address of the Client and cross verify against usual user machines.
+•	ClientInitiator
+o	This class forms the main class in MAZE IDPS Server to handle incoming RDC client requests.  It essentially works in association with Robot class hence emulating all the mouse and keyboard movements of client on the server machine.
+•	JavaFXLogin
+o	This forms the front end and logical separator of Users based on their credentials as well as MAC.  It has been setup with some provisions such as ability to interact with various classes and send across relevant information to client as well as give a fresh account for first time user.  
+•	DirectoryWatch
+o	This class captures actions performed on files in both Actual File System as well as Decoy File System.  Some of actions performed on files include creation, deletion and updation of files and directories.  It is a very prominent class which helps form both Users as well as Intruders forensics as well as in emulation of Decoy File System in exact way as that of Actual File System.
+•	Catcher1
+This class prominently extends the capability of DirectoryWatch class, it is designed to ‘catch’ file access and ‘throw’ custom events.  It also helps trigger Decoy File System in case of an Intruder or breach of policy by an insider.
+
+•	Catcher2Sandtrap
+o	This class prominently extends the capability of DirectoryWatch class, it is designed to ‘catch’ file access and ‘throw’ custom events.  It helps capture events in Sandtrap file system.
+
+6.2 Use Case Diagrams
+6.2.1 User Use Case Diagram
+ 
+Fig. 6.2 User Use Case Diagram of MAZE IDPS
+
+	The Figure 6.2 summarizes  the actions of User in MAZE Server; they include: 
+1.	Creation of New Account
+2.	Login
+3.	Creation of Files and Directories
+4.	Access, Modification and updation of files.
+5.	Log Out.
+
+6.2.2 Intruder/ Insider Use Case Diagram
+ 
+Fig. 6.3 Intruder/ Insider Use Case Diagram of MAZE IDPS
+The Figure 6.3 summarizes the Intruder/ Insider actions with the help of Use case diagrams.  The actions include the following:
+1.	Create Account [Optional]
+2.	Login using other User credentials
+3.	Creation of Files and Directories
+4.	Access, Modification, Updation of non-privileged files, Decoy Files and FC Integrated files.
+5.	Use of Fake credentials, beyond the system.
+6.	Session logout or abrupt disconnection of session
+
+6.2.3 Server Use Case Diagram
+ 
+Fig. 6.4 Server Use Case Diagram of MAZE IDPS
+The Figure 6.4 depicts Server Use Case Diagram, the actions of Server can be summarized as follows:
+1.	Creation and Activation of User Account.
+2.	Login and Log out Authentication
+3.	File Action Monitoring
+4.	Issue of Alerts to legitimate end users.
+5.	Issue of Session key and Exit key [optional] to end user.
+6.	Putting Intruder/ Insider in Sandtrap File System for monitoring of actions.
+
+6.2.4 Administrator Use Case Diagram
+ 
+Fig. 6.5 Administrator Use Case Diagram of MAZE IDPS
+
+	The Figure 6.5 summarizes the actions of Administrator, he has got the following actions:
+1.	Lock or Unlock User Account.
+2.	Review of Logs – File Action Logs, Forensic Logs, User and Intruder Machine logs etc.
+3.	Verification of user authenticity in case of a breach in user account.
+
+6.3 Package Structure
+6.1.1	MAZE Main Package Structure
+ 
+
+Fig. 6.6 Main Package Diagram of MAZE IDPS
+
+
+6.1.2	FAKER Package Structure 
+ 
+Fig. 6.7 FAKER Package Diagram of MAZE IDPS
+
+6.2	Database Design Details
+1.	Accessdb
+a.	Access_log table: to hold the information of the last access times of all the files and folders in the file system – DVFS.
+b.	Exported to AllFilesAccessLog.xls log file.
+
+2.	Breachlogdb
+a.	Breachlog table: to hold the information of the breach occurred due to file access by a particular user and the time of access.
+b.	Exported to BreachLog.xls log file.
+
+3.	Decoyfiledb
+a.	Decoyfilelog table: to hold the information on all the decoy files distributed across in DVFS.
+b.	Every file accessed by the user is compared against this table to detect any breach of security.
+
+4.	Fileattributedb
+a.	Fileattribute table: to hold the information on all the actual files in DVFS and the corresponding owner and group of the file.
+b.	Every file accessed by user is compared with the fileattribute table to know if the file belongs to the group of the user or if the user is the owner of the file.  If the condition is not met, it is flagged as a breach in security.
+
+5.	Floggerdb
+a.	Flogger table: to hold the information on the user session starting from login to logout, it includes information on which files where CREATED, DELETED, MODIFIED and UPDATED for a normal user session.  In case of a Intruder, the IP address of the intruder is captured and kept in the flogger and a corresponding entry is made in IPADDRESS table of Useraccountsdb for blocking of IP Address.
+b.	Exported to Flogger.xls log file on a regular basis.
+c.	User_document_access_table: to hold the forensic information regarding both user and intruder.  The fields are: Filename, Accessed_by, Action_performed, Time_of_Action, Total_ Access_ Times, User_Group, File_Group, Privileged_Access.  Its very helpful in forming proactive strategies as well as in deciding which file needs maximum protection.
+
+6.	Sandtrapaccessdb
+a.	Access_log table: to hold the information on the files being accessed in SANDTRAP Folder located on a separate disk.  It records data similar to Access_log of Accessdb, but is dedicated to files in SANDTRAP Environment.  All the files in SANDTRAP Environment are decoys.
+b.	Exported to SandTrapAccessLog.xls log file.
+
+7.	Useraccountsdb
+a.	User_accounts table: to hold the information on user account including the Username, Primary Password, Secondary Password or the Session key, Mobile Number and a field to lock the User account in case of suspicious activity.  The Session key is updated after every session of the user.
+b.	Ipaddress table: to hold the information on the IP address from which the security breach had occurred, before allowing any connection, the table is checked to see if there was a suspicious activity from the IP address of the client.
+c.	The information on blocked IP Address is exported to IPLog.xls log file.
+d.	Intruder_machines: to hold information regarding the MAC Addresses of Intruders.
+e.	User_exitkey: to hold the exit key of user.
+f.	User_machines: to hold information regarding MAC and IP Address of User machines.
+
+8.	Faker
+a.	Fc_file_attr: to store the owner for Fake Credential Integrated Decoy files.
+b.	Fc_table: to hold the fake credentials of respective users.  These credentials are integrated in decoy files and deployed across Sandtrap File System.
+
+6.3	Graphic User Interface Snapshots
+The Figures 6.8 a. to 6.8 c. provide snapshots of Client login to MAZE Server.  The client initially enters the port number of the server.  The Server enters the IP Address and port number of client. 
+ 
+Fig. 6.8 a. Client Snapshot – Port number
+
+ 
+Fig. 6.8 b. Server Snapshot – IP Address
+
+ 
+Fig. 6.8 c. Server Snapshot – Port Number
+
+The Figure 6.9 gives the Login screen snapshot of MAZE Storage Server.  As illustrated in the figure, user needs to enter his Username, Password and Session key to gain access to the Server files.
+
+ 
+Fig. 6.9 Server Snapshot – User Login
+
+ 
+Fig. 6.10 Server Snapshot – Actual/ Decoy File System Interface
+
+The Figure 6.10 provides the first visual the user encounters once he has logged into the server.  The figure enlists directories and files belonging to user as well as others.  The Figure 6.11 provides illustration of document access by user once inside the server.
+
+ 
+Fig. 6.11 Server Snapshot – Document Access
+ 
+Fig. 6.12 Server Snapshot – Exit Authentication Procedure
+
+	The Figure 6.12 provides a snapshot of Exit Authentication procedure conducted in MAZE Server once user is done with his session.  Apart from the session exit, the user can utilize retrieve and file check operations to retrieve a stable version of file as well as performing a file check of a file which may have been modified in his absence.  The Figures 6.13 a. to 6.13 c. illustrate new user creation.
+
+ 
+Fig. 6.13 a. Server Snapshot – New User Account Creation – User name
+
+ 
+
+Fig. 6.13 b. Server Snapshot – New User Account Creation – Password
+
+ 
+
+Fig. 6.13 c. Server Snapshot – New User Account Creation – Mobile Number
+
+ 
+Fig. 6.14 Server Snapshot – One time account reactivation on accidental decoy access
+
+ 
+Fig. 6.15 Server Snapshot – One time account reactivation disabled after first attempt
+
+	The Figure 6.14 illustrates one time session restoration done using retrieval of FC Integrated decoy files in MAZE Server.  This is a one time only operation.  The Fig. 6.1.5 illustrates disabled option of one time session restoration.
+
+ 
+Fig. 6.16 MAZE Server Log Viewer Front End based on JavaFX
+
+	The Figure 6.16 is the snapshot of Front End of Log viewer of MAZE Server.  It has the following logs; the same will be illustrated further in Results chapter.
+1.	User Machines
+2.	Intruder Machines
+3.	Intrusion IP Address
+4.	User Account Information
+5.	Intruder Forensics
+6.	User Forensics
+7.	File-Log by Date
+8.	MAZE Statistics
+a.	Flogger – All Operations
+b.	Flogger – Sessions Only
+c.	File Access – Intruder
+d.	File Access – User
+e.	Individual User Statistics
+All of the above features are illustrated in Figure 6.17.
+9.	Encryption V/s Access compared
+
+ 
+Fig. 6.17 MAZE Server Log Viewer [MAZE Statistics] Front End based on JavaFX
+
+
+
+
+
+
+
+
+
+
+
+
+CHAPTER 7
+FORENSIC RESULTS
+7.1 Results 
+ 
+Fig 7.1 Account Information
+
+The Fig 7.1 illustrates Account Information of users who have accounts in MAZE Server.  The interface is an administrator only accessible interface, the admin can choose to lock and unlock accounts from here.  The snapshot provided above illustrates the ability of administrator. 
+ 
+Fig 7.2 Intruder File Access Summary
+
+The Fig 7.2 illustrates Intruder File Access Summary.  The importance of the analysis comes into picture when the administrator needs to decide which file is most accessed by an intruder.  Depending on the access summary, it can be decided which file needs to be protected the most and the same is also useful in forming decoy documents to allure intruders.   
+
+
+
+
+
+
+
+
+
+
+The Fig 7.3 illustrated below provides the same information with regard to normal users.  An over the time file access pattern can be detected and used for coming up with custom policies or rules to maximize the probability of isolating intruder and insider actions.
+
+ 
+Fig 7.3 User File Access Summary
+
+
+       
+Fig 7.4 User Activity Summary
+
+The Fig 7.4 illustrates Activity Summary of individual users.  It comprises of statistics regarding Normal Sessions, Read Only Sessions, File Operations, Content Copy and Suspicious activity.  The Fig 7.5 illustrates one of the minor features of MAZE IDPS, the log of changes made to a file useful for the user to know what changes and where have they been made in his absence.
+
+ 
+Fig 7.5 File Change Log
+
+ 
+Fig 7.6 File Action Logger Statistics: Normal and Read Only Sessions
+
+The Fig 7.6 illustrates the overall percentage of Normal Sessions and Read Only Sessions.
+ 
+Fig 7.7 File Action Logger Statistics: Detailed
+
+The Fig 7.7 illustrates the overall percentage of Session activities conducted in Normal Sessions featuring New File Operations involving creation, deletion, updation and access of files; the content copy depicting copy of contents between files; Suspicious activity involving breach of System based policies and user based rules on their files as well as on Decoy files and FC Integrated decoy files.
+
+ 
+Fig 7.8 File Action Logger Session Activity
+
+The Fig 7.8 illustrates session activity of all users captured by File Action Logger.  It can be noted that along with session activity, IP Address and MAC Address are also captured of the User machine; they are useful in forming proactive strategy for mitigation of Intruder/ Insider threat.  The Fig 7.9 illustrates the content copy detection and capture by File Action Logger, useful in performing Forensics as well as forming evidence for malicious activities.
+
+ 
+Fig 7.9 File Action Logger Session Activity: Content Copy Illustration
+ 
+Fig 7.10 Intruder Forensics
+
+The Fig 7.10 illustrates Intruder forensics capturing actions performed on files as well as other information including the number of times a particular file has been accessed, hence used in enhancing the protection for the file.  The Fig 7.11 provides the same information regarding Users.
+
+ 
+Fig 7.11 User Forensics
+
+The Fig 7.12 gives Intruder IP Address captured; it is used to block suspicious users as well as placing Intruder in Sandtrap environment.
+
+ 
+Fig 7.12 Intrusion IP Address
+
+ 
+Fig 7.13 User Machines and IP Log
+
+The Fig 7.13 illustrates information regarding users in terms of MAC and IP Address, any user who logs in to the MAZE Server apart from the obtained machines; it is a criterion to place him in the Sandtrap File System.  The Fig 7.14 illustrates captured MAC Address of Intruder by MAZE IDPS.  This can be used to optionally place Intruder directly in Sandtrap File System
+ 
+Fig 7.14 Intruder Machines
+
+ 
+Fig 7.15 Encryption Vs Deception Comparison
+
+The Figure 7.15 illustrates Encryption Vs Deception techniques used in our system.  We have compared DES and AES Encryption schemes with our Deception oriented scheme.  The statistics shown clearly suggest an improvement in terms to time required for our scheme compared to Encryption schemes.
+
+The results obtained provide necessary information for isolation of intruders and insiders.  The content copy feature of File Action Logger is unique and is able to provide proof of actions by users as well as intruders over files beyond conventional loggers.  The MAC address captured is that of the Intruder, hence very useful in prevention of intrusion.  This information itself forms a valuable part in extension of the protocol to serve over multiple servers.  When the transaction history is compared, it comes to light that an effective strategy is employed by the system to place intruders in Sandtrap File System; thus capturing valuable information on intruder or insider behaviour.  The cost incurred in terms of infrastructure to capture intruder actions is much less as compared to honeypot or honeycomb based forensic techniques which rely on dedicated stand alone server infrastructure to perform the same. One of the key disadvantage of using decoy documents in an unsupervised environment was that the action may have been missed when the document is accessed by intruder with his firewall enabled has been addressed.  An additional system called the fake credential creator is used to capture intruder or insider beyond the system whenever he uses it in the real world.  From all the above information, it can be safely concluded that the probability of intrusion and insider threat detection is maximized by deployment of the protocol over the prototype server and the ability to catch the intruder/ insider when he uses the fake credentials obtained from the system is itself a capability unique to the proposed protocol.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CHAPTER 8
+CONCLUSION AND FUTURE WORK
+The motivation for coming up with a new security protocol came from the fact that the present protocols were unable to detect insider and intruder threat on the fly, in the act and at the time of crime.  A large amount of money is also lost in terms of information loss and fraudulent transactions in the online business and e-commerce fields.  Although the proposal of using deception to mitigate the threat had been proposed, no protocol made use of this ability in an extensive manner.  The inherent loophole of using decoy documents in user systems; a proposal to handle insider threat; necessitated for the decoy file to be copied onto the intruder machine.  
+
+The proposed protocol hence took into consideration all the above factors affecting present protocols and came up with a protocol which used deception as a main tool in fending off the insider and intruder threat.  Apart from overcoming the factors affecting the present security protocols, minimizing the CPU overhead by not relying on encryption mechanism to mitigate threat is also of prime focus. 
+   
+One of the key areas where the detection of a masquerader happens in our project is when they access decoy files instead of files of legitimate users. The probability of the masquerader accessing the decoy files can be given as total number of decoy files present in User’s directory.  If D is the total number of decoy files present in the system of N files of which A are actual files, the probability goes as follows:
+
+D/N, where N = D + A.
+
+One of the vulnerabilities exposed in MAZE Security protocol was it is not able to detect the masquerader if they access only the legitimate files of users.  While the modification of files is still logged, the compromise of the account associated is undetectable if there are no changes to the user account. 
+A counter argument also suffices as the session key would change for every session and the masquerader has to be in possession of User mobile for knowing the session key, however, the user would have logged a complaint about their stolen mobile, hence nullifying the transmission of session key to stolen mobile.  A feature of the implemented project is also the ability to capture User Machine MAC Address, hence for an intruder to successfully authenticate himself; he also needs to log in to the server using the User Machine.  The in place Anomaly detector detects MAC address based anomalies and places the intruder in the Sandtrap File System.   A further measure has been taken in terms of restoring back the files to original state or simply discarding the changes made to them whenever the user fails to provide exit authentication key.
+
+In case the user files are being shared among their group, and one of the members happens to go rogue, the decoy files form the last line of defence against such insider attack. Flogger, a custom built file action logger, which is being used in the MAZE, is able to log all the activities performed by users in their session, hence enabling the identification of user who performed the file operations.
+
+The implementation environment of MAZE is very restrictive; it allows files to be viewed in read – only mode only in case of a read-only login i.e. no session key provided initially, any changes made to file needs are not saved within DVFS (Decoy Virtual File System). Flogger once again detects the access of the file by user in read-only login.
+
+One of the concepts called the FAKER – Fake Credential Creator is deployed to automate creation of Decoy files which are placed in DVFS. The FAKER was restricted for generation of Fake Credit Card generation in its prototype phase.  It has been expanded now to take into account users’ credentials and generate fake credentials.  It works in terms of parameterized fakes i.e. if ‘n’ genuine credentials are available, ‘m’ are faked where m < n.  The MAZE security system also detects the copy of sentences from one file to another; it can detect the creation of a new file and modifications done along with it.
+
+The Security in Storage Area Networks is a concern expressed by various industries and industry personnel, the centralization of storage management opens up various security issues. Numerous protocols are being designed everyday to make the Storage Network secure. The extensive reliance on audit logs and system logs for intruder and intrusion detection involves considerable delay in the form of Detection Latency. In this project, we have proposed and implemented MAZE security protocol which gives a new perspective in the design of security protocols. We make use of Decoy documents to keep intruder hooked to the Server till their location is isolated. Since our protocol is designed to catch the intruder on the fly, there is a reduction in detection latency, which allows the system to be robust to the threat of Computer hackers and intruders. The simulation results presented show that the computational overhead is less compared to other encryption based security measures and the reliance on logs for intrusion detection is reduced. The usage of Fake credential integrated Decoy files gave the system an additional advantage of being able to catch the intruder beyond the system.  The results are encouraging for future research work and implementation of MAZE security protocol as a reliable option for detection of intruders and insider threat in Storage Area Network.
+As a future work, we would like to extend our MAZE security protocol concept to virtualization layer in Storage Area Networks, and we intend to make MAZE more scalable by extending it to operate on a cluster of Servers at the same time.  Another aspect being the storage requirement of Deception techniques will be reduced and automation of decoy document placement will be more User Behavior oriented. 
+
+
+
+
+
+
+BIBLIOGRAPHY
+[1] Adam G. Pennington, John D. Strunk, John Linwood Griffin, Craig A.N. Soules, Garth R. Goodson, Gregory R. Ganger “Storage-based Intrusion Detection: Watching storage activity for suspicious behavior” - Proceedings of 12th USENIX Security Symposium, Washington, D.C., Aug 4-8, 2003. Supercedes Carnegie Mellon University SCS Technical Report CMU-CS-02-179, September 2002.
+[2] John. D. Strunk, Garth R. Goodson, Michael L. Scheinholtz, Craig A.N. Soules, and Gregory R. Ganger. Self-securing storage: protecting data in compromised systems. In Proceedings of the 4th Symposium on Operating Systems Design and Implementation, October 2000.
+[3] Bowen, B.M., Kemerlis, V.P., Prabhu, P., Keromytis, A.D., Stolfo, S.J.: “Automating the injection of believable decoys to detect snooping.” In: Proceedings of the third ACM Conference on Wireless Network Security (WiSec). pp. 81{86 (2010)
+[4] “Storage Area Networks: Data Security and Fabric Management” – White Paper Product Management March 2002 Datalink.
+[5] Bowen, B.M., Hershkop, S., Keromytis, A.D., Stolfo, S.J.: Baiting Inside Attackers Using Decoy Documents. In: Proceedings of the 5th International ICST Conference on Security and Privacy in Communication Networks (SecureComm). pp. 51-70 (September 2009)
+[6] Bowen, B.M.; Ben Salem, M.; Hershkop, S.; Keromytis, A.D.; Stolfo, S.J.; , "Designing Host and Network Sensors to Mitigate the Insider Threat," Security & Privacy, IEEE , vol.7, no.6, pp.22-29, Nov.-Dec. 2009
+[7] Brian M. Bowen, “Design and Analysis of Decoy Systems for Computer Security” -  Columbia University 2011.
+[8] Tate, J., Lucchese, F., and Moore, R. Introduction to Storage Area Networks, United States: Vervante, September 2006.
+[9] Vasilis Pappas, Brian M. Bowen, and Angelos D. Keromytis. Evaluation of a spyware detection system using thin client computing. In ICISC, 2010.
+[10] Shujun Li; Schmitz, R.; , "A novel anti-phishing framework based on honeypots," eCrime Researchers Summit, 2009. eCRIME '09. , vol., no., pp.1-13, Sept. 20 2009-Oct. 21 2009
+[11] T. Cormen, C. Lesierson, L. Rivest, and C. Stein. Introduction to Algorithms. MIT Press, Cambridge, MA, 2nd edition, 2001.
+[12] Bowen, B.M., Hershkop, S., Keromytis, A.D., Stolfo, S.J.: Baiting Inside Attackers Using Decoy Documents. In: Proceedings of the 5th International ICST Conference on Security and Privacy in Communication Networks (SecureComm). pp. 51-70 (September 2009)
+[13] Hashing Credit Card Numbers: Unsafe Application Practices – E-paper : Integrigy Corporation 2007.
+[14] Luhn test of credit card numbers ISO/IEC 7812-1:2006 Identification cards -- Identification of issuers -- Part 1: Numbering system (http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=39698)http://rosettacode.org/wiki/Luhn_test_of_credit_ card_ numbers.
+[15] Chiyuan Li, Zhiqiang Yao, The Validation of Credit Card Number on Wired and Wireless Internet, North China Institute of Aerospace Engineering, Langfang, China, March 2011
+[16] “2012 Online Fraud Report: Online Payment Fraud Trends, Merchant Practices and Benchmarks.” CyberSource. http://cybersource.com June 26 2012.
+[17] E-COMMERCE FRAUD Protecting Data, Transactions and Consumers Whitepaper EMC2 RSA http://www.rsa.com/products/EDS/whitepapers/11783_WP_eCOMM_0712.pdf
+[18] M. Ben Salem and S. Stolfo, “Decoy Document Deployment for Effective Masquerade Attack Detection,” in Conference on Detection of Intrusions and Malware and Vulnerability Assessment, 2011.
+[19] Stolfo SJ, Salem MB, Keromytis AD (2012) Fog computing: mitigating insider data theft attacks in the cloud. In: 2012 IEEE symposium on security and privacy workshops. IEEE Press, New York, pp 125–128.
+[20] Voris, J.; Boggs, N.; Stolfo, S.J.; , "Lost in Translation: Improving Decoy Documents via Automated Translation," Security and Privacy Workshops (SPW), 2012 IEEE Symposium on , vol., no., pp.129-133, 24-25May2012
+
+
+
+	PUBLICATION DETAILS
+Conference Presentations
+1.	Alok G and N R Sunitha. Article: MAZE Security Protocol for Self Securing S4 Storage Server. IJCA Special Issue on Issues and Challenges in Networking, Intelligence and Computing Technologies ICNICT(5):13-17, November 2012. Published by Foundation of Computer Science, New York, USA available @ https://www.ijcaonline.org/specialissues/icnict/number5/9443-1027 presented at KIET, Ghaziabad.
+2.	Alok G, N R Sunitha : “Fake Credential Creator for improving effectiveness of Decoy Files, Intruder Identification and Mitigating Threat of Online Transaction Fraud ” IEEE International Conference on Research and Development Prospects on Engineering and Technology 2013 [ICRDPET - 2013] EGS Pillay College of Engineering, Nagapattinam March 28-30 2013
+
+Journal Publication
+1.	Alok G and N R Sunitha. Article: MAZE Security Protocol for Self Securing S4 Storage Server. IJCA Special Issue on Issues and Challenges in Networking, Intelligence and Computing Technologies ICNICT(5):13-17, November 2012. Published by Foundation of Computer Science, New York, USA available @ https://www.ijcaonline.org/specialissues/icnict/number5/9443-1027
+
+
