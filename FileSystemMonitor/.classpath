@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/MySQL/Connector J 5.1.20.0/mysql-connector-java-5.1.20-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Oracle/JavaFX 2.2 Runtime/lib/jfxrt.jar"/>
+	<classpathentry kind="lib" path="C:/apache-tomcat-7.0.30/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/javamail-1.4.5/javaee.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/poi-3.8/poi-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/poi-3.8/poi-examples-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/poi-3.8/poi-excelant-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/poi-3.8/poi-ooxml-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/poi-3.8/poi-ooxml-schemas-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/poi-3.8/poi-scratchpad-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="C:/javamail-1.4.5/lib/dsn.jar"/>
+	<classpathentry kind="lib" path="C:/javamail-1.4.5/lib/imap.jar"/>
+	<classpathentry kind="lib" path="C:/javamail-1.4.5/lib/mailapi.jar"/>
+	<classpathentry kind="lib" path="C:/javamail-1.4.5/lib/pop3.jar"/>
+	<classpathentry kind="lib" path="C:/javamail-1.4.5/lib/smtp.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/itextpdf-5.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/itextpdf-5.3.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/itextpdf-5.3.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/itext-pdfa-5.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/itext-pdfa-5.3.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/itext-pdfa-5.3.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/itext-xtra-5.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/itext-xtra-5.3.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/itext-xtra-5.3.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/pdfbox-app-1.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/fontbox-1.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jempbox-1.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/pdfbox-1.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/lib/commons-codec-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/lib/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/lib/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/ooxml-lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/ooxml-lib/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/ooxml-lib/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/poi-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/poi-examples-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/poi-excelant-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/poi-ooxml-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/poi-ooxml-schemas-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/poi-scratchpad-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/poi-3.9/poi-ooxml-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/org.apache.servicemix.bundles.httpcore-4.0-alpha6_1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/httpclient-4.0-beta2.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/way2sms-api-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/javacv-bin/javacpp.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/javacv-bin/javacv.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/javacv-bin/javacv-android-arm.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/javacv-bin/javacv-linux-x86.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/javacv-bin/javacv-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/javacv-bin/javacv-macosx-x86_64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/javacv-bin/javacv-windows-x86.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/javacv-bin/javacv-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/JMyron0025/JMyron/library/JMyron.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/poi-3.8/lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/poi-3.8/lib/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/poi-3.8/lib/log4j-1.2.13.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.samples.docxconverters.docx4j"/>
+	<classpathentry kind="lib" path="/org.samples.docxconverters.docx4j/lib/docx4j-2.8.1.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/activation.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/j2me_sg_ri.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/JadTool.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/jaxrpc-api.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/jaxrpc-impl.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/jaxrpc-spi.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/mail.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/MEKeyTool.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/saaj-api.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/saaj-impl.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/schema2beansdev.jar"/>
+	<classpathentry kind="lib" path="C:/WTK2.5.2/bin/xsdlib.jar"/>
+	<classpathentry kind="lib" path="/org.samples.docxconverters.xdocreport/lib/org.apache.poi.xwpf.converter.pdf-1.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alok Omkar/Desktop/Project/hyperic-sigar-1.6.4/sigar-bin/lib/sigar.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
